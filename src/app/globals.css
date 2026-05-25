@@ -1,26 +1,223 @@
 @import "tailwindcss";
 
+@theme {
+  /* === EXACT COLORS FROM THE BOOST LOGO === */
+  --color-logo-red: #EF3B2C;       /* B letter - left side of logo */
+  --color-logo-amber: #FFAB00;     /* S & T letters - right side of logo */
+  --color-logo-brown: #3D1200;     /* Owl eyes - dark brown */
+  
+  /* Brand UI Colors */
+  --color-brand-purple-light: #7C3AED;
+  --color-brand-purple: #4C1D95;
+  --color-brand-purple-dark: #2E1065;
+  --color-brand-purple-deep: #0F052D;
+  --color-brand-red: #EF3B2C;      /* Same as logo-red */
+  --color-brand-amber: #FFAB00;    /* Same as logo-amber - replaces all orange */
+  --color-brand-gold: #FFAB00;     /* Alias for backward compat */
+  --color-brand-gold-light: #FFC233; /* Lighter version of logo amber */
+  
+  --font-cairo: "Cairo", sans-serif;
+  --font-outfit: "Outfit", sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-cairo: 'Cairo', sans-serif;
+  --font-outfit: 'Outfit', sans-serif;
+  
+  --background: #090514;
+  --foreground: #F3F4F6;
+  
+  /* Logo exact colors as CSS vars */
+  --logo-red: #EF3B2C;
+  --logo-amber: #FFAB00;
+  --logo-brown: #3D1200;
+  
+  --color-purple-light: 124, 58, 237;
+  --color-purple: 76, 29, 149;
+  --color-purple-dark: 46, 16, 101;
+  --color-purple-deep: 15, 5, 45;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-outfit), var(--font-cairo), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar — matches logo gradient */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090514;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #EF3B2C, #FFAB00);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #FFAB00, #EF3B2C);
+}
+
+/* Background Gradients & Glows */
+.ambient-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.18) 0%, rgba(0, 0, 0, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+/* Logo gradient text — exact logo colors */
+.gradient-text-logo {
+  background: linear-gradient(to right, #EF3B2C, #FF7A1A, #FFAB00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* =============================================
+   LOGO DISPLAY HELPERS
+   Uses mix-blend-mode:screen to erase white bg
+   ============================================= */
+.logo-screen {
+  mix-blend-mode: screen;
+}
+
+.logo-container {
+  background: #090514;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* For preloader — larger, no radius needed */
+.logo-container-preloader {
+  background: #090514;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* =============================================
+   GLASSMORPHISM
+   ============================================= */
+.glassmorphism {
+  background: rgba(15, 5, 45, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glassmorphism-card {
+  background: rgba(25, 12, 58, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(109, 40, 217, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover uses logo-amber */
+.glassmorphism-card:hover {
+  border-color: rgba(255, 171, 0, 0.35);
+  box-shadow: 0 10px 30px -10px rgba(124, 58, 237, 0.3);
+  transform: translateY(-4px);
+}
+
+/* =============================================
+   ANIMATIONS
+   ============================================= */
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Pulse glow uses logo exact colors */
+@keyframes pulse-glow {
+  0%, 100% {
+    filter: 
+      drop-shadow(0 0 10px rgba(239, 59, 44, 0.55)) 
+      drop-shadow(0 0 25px rgba(124, 58, 237, 0.25));
+    opacity: 0.9;
+  }
+  50% {
+    filter: 
+      drop-shadow(0 0 22px rgba(239, 59, 44, 0.85)) 
+      drop-shadow(0 0 45px rgba(255, 171, 0, 0.45));
+    opacity: 1;
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1.5deg);
+  }
+}
+
+@keyframes float-particles {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(80px) scale(0.4);
+    opacity: 0;
+  }
+}
+
+/* Preloader scan-line sweep */
+@keyframes scan-line {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+.animate-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Logo float & glow — applied in preloader */
+.logo-glow {
+  animation: pulse-glow 2.8s infinite ease-in-out;
+}
+
+.float-logo {
+  animation: float-slow 5s ease-in-out infinite;
+}
+
+/* Skeleton loader */
+.skeleton-pulse {
+  background: linear-gradient(90deg, rgba(30,16,68,0.4) 25%, rgba(68,30,120,0.5) 50%, rgba(30,16,68,0.4) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }

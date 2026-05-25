@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { useAuth, UserRole } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { Icons } from '@/components/Icons';
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
@@ -39,11 +40,11 @@ export const Navbar: React.FC = () => {
           {/* Contact and Experience info */}
           <div className="flex items-center gap-4 font-mono text-[11px]">
             <span className="flex items-center gap-1">
-              <span>📞</span> <span className="hover:text-brand-amber transition-colors">079 529 4030</span>
+              <Icons.Phone className="text-brand-amber" size={12} /> <span className="hover:text-brand-amber transition-colors">079 529 4030</span>
             </span>
             <span className="hidden md:inline text-brand-purple-light">|</span>
             <span className="hidden md:inline flex items-center gap-1 text-slate-400">
-              <span>📍</span> <span>Amman, Swefieh</span>
+              <Icons.MapPin className="text-slate-400" size={12} /> <span>Amman, Swefieh</span>
             </span>
             <span className="text-brand-purple-light">|</span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-red to-brand-amber font-bold">
@@ -64,7 +65,7 @@ export const Navbar: React.FC = () => {
             >
               <span className={`w-2 h-2 rounded-full ${currentRoleInfo?.color}`} />
               <span>{language === 'ar' ? currentRoleInfo?.nameAr : currentRoleInfo?.name}</span>
-              <span className="text-[9px] text-slate-400">â–¼</span>
+              <Icons.ArrowDown size={8} className="text-slate-400" />
             </button>
 
             {isRoleOpen && (
@@ -86,7 +87,7 @@ export const Navbar: React.FC = () => {
                         {language === 'ar' ? role.nameAr : role.name}
                       </span>
                     </div>
-                    {activeRole === role.id && <span className="text-brand-amber text-[10px]">✓</span>}
+                    {activeRole === role.id && <Icons.Check className="text-brand-amber" size={12} />}
                   </button>
                 ))}
               </div>
@@ -165,8 +166,8 @@ export const Navbar: React.FC = () => {
             href="/cart"
             className="flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-brand-purple-deep/80 hover:bg-[#1a0f3d] border border-brand-purple/20 transition-all duration-300 relative group"
           >
-            <div className="relative">
-              <span className="text-lg">🛒</span>
+            <div className="relative flex items-center justify-center">
+              <Icons.Cart className="text-white group-hover:text-brand-amber transition-all duration-200" size={18} />
               {getCartCount() > 0 && (
                 <span className="absolute -top-2.5 -right-2.5 bg-brand-red text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border border-[#090514] scale-95 shadow-[0_0_8px_rgba(239,68,68,0.7)] group-hover:scale-110 transition-transform">
                   {getCartCount()}
@@ -184,7 +185,7 @@ export const Navbar: React.FC = () => {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 rounded-md bg-brand-purple/20 border border-brand-purple/30 text-white"
           >
-            <span className="text-xl">{isMobileMenuOpen ? '✕' : '☰'}</span>
+            {isMobileMenuOpen ? <Icons.Close size={18} /> : <Icons.Menu size={18} />}
           </button>
         </div>
       </div>

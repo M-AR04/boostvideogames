@@ -7,6 +7,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { useCart } from '@/context/CartContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { Icons } from '@/components/Icons';
 
 export default function Cart() {
   const { language, t } = useLanguage();
@@ -92,7 +93,9 @@ export default function Cart() {
           /* Order success notification state with redirect details */
           <div className="max-w-2xl mx-auto glassmorphism rounded-3xl p-8 md:p-12 text-center border border-green-500/25 relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-[4px] bg-green-500" />
-            <span className="text-6xl mb-6 block animate-bounce">💬</span>
+            <div className="flex justify-center mb-6">
+              <Icons.Message size={64} className="text-green-500 animate-bounce" />
+            </div>
             <h2 className="text-2xl md:text-3xl font-black text-green-400 mb-4">{t('successOrder')}</h2>
             <p className="text-xs md:text-sm text-slate-300 leading-relaxed font-outfit mb-8">
               {t('successOrderDesc')}
@@ -104,7 +107,7 @@ export default function Cart() {
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-green-600 hover:bg-green-700 text-white font-black text-sm shadow-[0_0_15px_rgba(22,163,74,0.4)] transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
               >
-                <span>💬</span>
+                <Icons.Message size={18} className="text-white" />
                 <span>{language === 'ar' ? 'افتح واتساب يدوياً' : 'Open WhatsApp Manually'}</span>
               </a>
               <Link
@@ -275,7 +278,7 @@ export default function Cart() {
                       <span className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin" />
                     ) : (
                       <>
-                        <span>💬</span>
+                        <Icons.Message size={18} className="text-white" />
                         <span>{t('confirmWhatsApp')}</span>
                       </>
                     )}
@@ -288,7 +291,7 @@ export default function Cart() {
         ) : (
           /* Empty cart placeholder state */
           <div className="flex flex-col items-center justify-center py-20 text-center gap-4">
-            <span className="text-6xl">🛒</span>
+            <Icons.Cart size={64} className="text-slate-500" />
             <p className="text-sm font-bold text-slate-400">{t('cartEmpty')}</p>
             <Link
               href="/shop"

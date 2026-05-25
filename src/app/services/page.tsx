@@ -5,6 +5,30 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { services, sampleTickets, statusColors } from '@/data/services';
 import { useLanguage } from '@/context/LanguageContext';
+import { Icons } from '@/components/Icons';
+
+const getServiceIcon = (id: string) => {
+  switch (id) {
+    case 'controller-drift':
+      return <Icons.Gamepad className="text-brand-red animate-pulse" size={32} />;
+    case 'controller-button':
+      return <Icons.Gear className="text-brand-amber" size={32} />;
+    case 'console-hdmi':
+      return <Icons.Wrench className="text-purple-400" size={32} />;
+    case 'console-ssd':
+      return <Icons.Inventory className="text-blue-400" size={32} />;
+    case 'deep-clean':
+      return <Icons.Wrench className="text-teal-400" size={32} />;
+    case 'controller-clean':
+      return <Icons.Gamepad className="text-green-400" size={32} />;
+    case 'custom-shell':
+      return <Icons.Gamepad className="text-pink-400" size={32} />;
+    case 'trigger-mod':
+      return <Icons.Gear className="text-yellow-400 animate-spin-slow" size={32} />;
+    default:
+      return <Icons.Wrench className="text-brand-amber" size={32} />;
+  }
+};
 
 export default function Services() {
   const { language, t } = useLanguage();
@@ -183,7 +207,7 @@ export default function Services() {
                     {trackedTicket.notes.length > 0 ? (
                       trackedTicket.notes.map((note, index) => (
                         <div key={index} className="flex gap-2 text-[11px] leading-relaxed border-b border-brand-purple/5 pb-2 last:border-b-0 last:pb-0">
-                          <span className="text-brand-amber">▸</span>
+                          <Icons.ArrowRight size={10} className="text-brand-amber mt-1 shrink-0" />
                           <span className="text-slate-300">{note}</span>
                         </div>
                       ))
@@ -210,7 +234,9 @@ export default function Services() {
                 className="glassmorphism-card rounded-2xl p-5 border border-brand-purple/10 flex flex-col justify-between h-full relative"
               >
                 <div>
-                  <span className="text-3xl mb-3 block">{s.icon}</span>
+                  <div className="mb-4">
+                    {getServiceIcon(s.id)}
+                  </div>
                   <h3 className="text-sm font-bold text-white mb-2">
                     {language === 'ar' ? s.nameAr : s.name}
                   </h3>
@@ -243,7 +269,9 @@ export default function Services() {
 
             {bookingSuccess ? (
               <div className="bg-green-500/20 border border-green-500/30 text-green-400 p-6 rounded-2xl text-center flex flex-col items-center gap-4">
-                <span className="text-4xl animate-bounce">💬</span>
+                <div className="flex justify-center mb-4">
+                  <Icons.Message size={64} className="text-green-500 animate-bounce" />
+                </div>
                 <h3 className="text-sm font-bold">{t('mmsSuccess')}</h3>
                 <p className="text-xs leading-relaxed max-w-md">
                   {t('mmsSuccessDesc').replace('{id}', bookingSuccess)}
@@ -252,9 +280,10 @@ export default function Services() {
                   href={waRepairLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-2.5 rounded-xl bg-green-600 hover:bg-green-700 text-white font-black text-xs shadow-md transition-all hover:scale-105 active:scale-95"
+                  className="px-6 py-2.5 rounded-xl bg-green-600 hover:bg-green-700 text-white font-black text-xs shadow-md transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 mx-auto"
                 >
-                  {language === 'ar' ? 'إرسال التذكرة للواتساب 💬' : 'Send Ticket to WhatsApp 💬'}
+                  <Icons.Message size={16} />
+                  <span>{language === 'ar' ? 'إرسال التذكرة للواتساب' : 'Send Ticket to WhatsApp'}</span>
                 </a>
               </div>
             ) : (
@@ -341,7 +370,7 @@ export default function Services() {
                     <span className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin" />
                   ) : (
                     <>
-                      <span>🔧</span>
+                      <Icons.Wrench size={18} className="text-white" />
                       <span>{t('generateTicket')}</span>
                     </>
                   )}

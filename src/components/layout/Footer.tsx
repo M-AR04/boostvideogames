@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
+import { Icons } from '@/components/Icons';
 
 export const Footer: React.FC = () => {
   const { t } = useLanguage();
@@ -50,7 +51,7 @@ export const Footer: React.FC = () => {
               rel="noopener noreferrer"
               className="w-8 h-8 rounded-full bg-brand-purple/20 border border-brand-purple/30 hover:border-brand-amber hover:bg-brand-amber/10 flex items-center justify-center text-sm transition-all duration-300"
             >
-              📸
+              <Icons.Camera size={14} />
             </a>
             <a
               href="https://www.google.com/maps/place/Boost+Video+Game/data=!4m2!3m1!1s0x0:0x63350cf009b132c?sa=X&ved=1t:2428&ictx=111"
@@ -58,7 +59,7 @@ export const Footer: React.FC = () => {
               rel="noopener noreferrer"
               className="w-8 h-8 rounded-full bg-brand-purple/20 border border-brand-purple/30 hover:border-brand-amber hover:bg-brand-amber/10 flex items-center justify-center text-sm transition-all duration-300"
             >
-              📍
+              <Icons.MapPin size={14} />
             </a>
           </div>
         </div>
@@ -96,15 +97,15 @@ export const Footer: React.FC = () => {
           </h4>
           <div className="flex flex-col gap-3 text-xs leading-relaxed text-slate-400">
             <span className="flex items-start gap-2">
-              <span>📍</span>
+              <Icons.MapPin size={14} className="shrink-0 mt-0.5 text-brand-amber" />
               <span>{t('locationDesc')}</span>
             </span>
             <span className="flex items-center gap-2">
-              <span>📞</span>
+              <Icons.Phone size={14} className="shrink-0 text-brand-amber" />
               <span>{t('phone')}</span>
             </span>
             <span className="flex items-center gap-2">
-              <span>🕒</span>
+              <Icons.Clock size={14} className="shrink-0 text-brand-amber" />
               <span>{t('hours')}</span>
             </span>
           </div>

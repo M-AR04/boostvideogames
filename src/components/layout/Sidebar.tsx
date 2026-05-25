@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { Icons } from '@/components/Icons';
 
 export const Sidebar: React.FC = () => {
   const pathname = usePathname();
@@ -12,10 +13,10 @@ export const Sidebar: React.FC = () => {
   const { language, t } = useLanguage();
 
   const links = [
-    { href: '/dashboard', labelKey: 'overviewSidebar', icon: '📊' },
-    { href: '/dashboard/inventory', labelKey: 'imsSidebar', icon: '📦' },
-    { href: '/dashboard/inventory/audit', labelKey: 'jardSidebar', icon: '🔍' },
-    { href: '/dashboard/maintenance', labelKey: 'mmsSidebar', icon: '🔧' },
+    { href: '/dashboard', labelKey: 'overviewSidebar', icon: <Icons.Dashboard size={14} /> },
+    { href: '/dashboard/inventory', labelKey: 'imsSidebar', icon: <Icons.Inventory size={14} /> },
+    { href: '/dashboard/inventory/audit', labelKey: 'jardSidebar', icon: <Icons.Search size={14} /> },
+    { href: '/dashboard/maintenance', labelKey: 'mmsSidebar', icon: <Icons.Wrench size={14} /> },
   ];
 
   return (
@@ -66,7 +67,7 @@ export const Sidebar: React.FC = () => {
         href="/"
         className="hidden lg:flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-brand-purple-deep hover:bg-[#1a0e3b] border border-brand-purple/30 text-xs font-bold text-slate-300 hover:text-white transition-all duration-200 font-outfit"
       >
-        <span>{language === 'ar' ? '▶' : '◀'}</span>
+        <span>{language === 'ar' ? <Icons.ArrowRight size={12} /> : <Icons.ArrowLeft size={12} />}</span>
         <span>{t('backStore')}</span>
       </Link>
     </aside>

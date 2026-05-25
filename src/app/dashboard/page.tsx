@@ -6,6 +6,7 @@ import Sidebar from '@/components/layout/Sidebar';
 import { dashboardStats, recentOrders, weeklySales, topProducts } from '@/data/dashboard';
 import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { Icons } from '@/components/Icons';
 
 export default function Dashboard() {
   const { activeRole } = useAuth();
@@ -17,7 +18,7 @@ export default function Dashboard() {
       <div className="flex flex-col min-h-screen">
         <Navbar />
         <div className="flex-grow flex flex-col items-center justify-center text-center p-8 gap-4">
-          <span className="text-5xl">🛑</span>
+          <Icons.Lock size={64} className="text-brand-red animate-pulse" />
           <h2 className="text-xl font-bold text-white">Access Denied</h2>
           <p className="text-xs text-slate-400 max-w-sm">
             Your active profile role (Customer) does not have privileges to view the ERP general ledger. Please use the Role Switcher in the top bar to become an Admin, Technician or Inventory Manager!
@@ -57,21 +58,26 @@ export default function Dashboard() {
             
             {/* KPI 1: Today sales */}
             <div className={`glassmorphism rounded-2xl p-5 border border-brand-purple/20 relative overflow-hidden flex flex-col gap-2 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-              <div className={`absolute top-4 ${language === 'ar' ? 'left-4' : 'right-4'} text-brand-amber text-lg`}>💰</div>
+              <div className={`absolute top-4 ${language === 'ar' ? 'left-4' : 'right-4'} text-brand-amber`}>
+                <Icons.Dollar size={24} />
+              </div>
               <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider font-mono">
                 {t('todayRevenue')}
               </span>
               <h2 className="text-xl lg:text-2xl font-black text-white font-mono">
                 {dashboardStats.totalSalesToday.toFixed(2)} JOD
               </h2>
-              <span className="text-[10px] text-green-400 font-mono">
-                ▲ +14.2% {language === 'ar' ? 'مقارنة بالأمس' : 'vs yesterday'}
+              <span className="text-[10px] text-green-400 font-mono flex items-center gap-1">
+                <Icons.ArrowUp size={10} className="text-green-400 shrink-0" />
+                <span>+14.2% {language === 'ar' ? 'مقارنة بالأمس' : 'vs yesterday'}</span>
               </span>
             </div>
 
             {/* KPI 2: Active repairs */}
             <div className={`glassmorphism rounded-2xl p-5 border border-brand-purple/20 relative overflow-hidden flex flex-col gap-2 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-              <div className={`absolute top-4 ${language === 'ar' ? 'left-4' : 'right-4'} text-brand-red text-lg`}>🔧</div>
+              <div className={`absolute top-4 ${language === 'ar' ? 'left-4' : 'right-4'} text-brand-red`}>
+                <Icons.Wrench size={24} />
+              </div>
               <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider font-mono">
                 {t('mmsActive')}
               </span>
@@ -85,7 +91,9 @@ export default function Dashboard() {
 
             {/* KPI 3: Stock alerts */}
             <div className={`glassmorphism rounded-2xl p-5 border border-brand-purple/20 relative overflow-hidden flex flex-col gap-2 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-              <div className={`absolute top-4 ${language === 'ar' ? 'left-4' : 'right-4'} text-brand-amber text-lg`}>📦</div>
+              <div className={`absolute top-4 ${language === 'ar' ? 'left-4' : 'right-4'} text-brand-amber`}>
+                <Icons.Inventory size={24} />
+              </div>
               <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider font-mono">
                 {t('imsStockAlerts')}
               </span>
@@ -99,15 +107,18 @@ export default function Dashboard() {
 
             {/* KPI 4: Customers today */}
             <div className={`glassmorphism rounded-2xl p-5 border border-brand-purple/20 relative overflow-hidden flex flex-col gap-2 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-              <div className={`absolute top-4 ${language === 'ar' ? 'left-4' : 'right-4'} text-brand-purple-light text-lg`}>👥</div>
+              <div className={`absolute top-4 ${language === 'ar' ? 'left-4' : 'right-4'} text-brand-purple-light`}>
+                <Icons.Users size={24} />
+              </div>
               <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider font-mono">
                 {t('walkins')}
               </span>
               <h2 className="text-xl lg:text-2xl font-black text-white font-mono">
                 {dashboardStats.customersToday} {language === 'ar' ? 'زائر' : 'shoppers'}
               </h2>
-              <span className="text-[10px] text-green-400 font-mono">
-                ▲ +8.5% {language === 'ar' ? 'المعدل الأسبوعي' : 'average week'}
+              <span className="text-[10px] text-green-400 font-mono flex items-center gap-1">
+                <Icons.ArrowUp size={10} className="text-green-400 shrink-0" />
+                <span>+8.5% {language === 'ar' ? 'المعدل الأسبوعي' : 'average week'}</span>
               </span>
             </div>
 

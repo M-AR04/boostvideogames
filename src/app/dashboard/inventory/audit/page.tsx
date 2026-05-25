@@ -6,6 +6,7 @@ import Sidebar from '@/components/layout/Sidebar';
 import { products } from '@/data/products';
 import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { Icons } from '@/components/Icons';
 
 export default function AuditDashboard() {
   const { activeRole } = useAuth();
@@ -61,7 +62,7 @@ export default function AuditDashboard() {
       <div className="flex flex-col min-h-screen">
         <Navbar />
         <div className="flex-grow flex flex-col items-center justify-center text-center p-8 gap-4">
-          <span className="text-5xl">🛑</span>
+          <Icons.Lock size={64} className="text-brand-red animate-pulse" />
           <h2 className="text-xl font-bold text-white">Access Denied</h2>
           <p className="text-xs text-slate-400 max-w-sm">
             Please switch your role to Inventory Manager or Admin in the top bar to access the IMS Auditing (Jard) module.
@@ -110,7 +111,13 @@ export default function AuditDashboard() {
                   : 'bg-green-500/10 border-green-500/30 text-green-400'
               }`}
             >
-              <span className="text-4xl mb-3 block">{totalDiscrepancies > 0 ? '⚠️' : '✅'}</span>
+              <div className="flex justify-center mb-3">
+                {totalDiscrepancies > 0 ? (
+                  <Icons.Alert size={48} className="text-brand-red animate-bounce" />
+                ) : (
+                  <Icons.Success size={48} className="text-green-400" />
+                )}
+              </div>
               <h3 className="text-sm font-bold mb-1">
                 {totalDiscrepancies > 0
                   ? (language === 'ar' ? 'تم كشف فروقات في الجرد الميداني!' : 'Discrepancies Detected!')
@@ -178,7 +185,10 @@ export default function AuditDashboard() {
                                 {variance > 0 ? `+${variance}` : variance} {language === 'ar' ? 'وحدات' : 'units'}
                               </span>
                             ) : (
-                              <span className="text-green-400">{language === 'ar' ? '✓ مطابقة تامة' : '✓ Perfect'}</span>
+                              <span className="text-green-400 inline-flex items-center gap-1 justify-end w-full">
+                                <Icons.Check size={12} />
+                                <span>{language === 'ar' ? 'مطابقة تامة' : 'Perfect'}</span>
+                              </span>
                             )
                           ) : (
                             <span className="text-slate-500">{language === 'ar' ? 'بانتظار التقييم' : 'Pending calculation'}</span>

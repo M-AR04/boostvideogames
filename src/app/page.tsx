@@ -7,6 +7,7 @@ import Footer from '@/components/layout/Footer';
 import ProductCard from '@/components/ProductCard';
 import { products } from '@/data/products';
 import { useLanguage } from '@/context/LanguageContext';
+import { Icons } from '@/components/Icons';
 
 export default function Home() {
   const { language, t } = useLanguage();
@@ -44,14 +45,14 @@ export default function Home() {
                 className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-brand-red via-brand-amber to-brand-amber text-white font-black text-sm shadow-[0_0_20px_rgba(217,119,6,0.5)] transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
               >
                 <span>{t('shopBtn')}</span>
-                <span>🎮</span>
+                <Icons.Gamepad size={14} />
               </Link>
               <Link
                 href="/services"
                 className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#1b103e] hover:bg-[#28185c] border border-brand-purple/40 hover:border-brand-purple-light/40 text-white font-black text-sm transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
               >
                 <span>{t('repairBtn')}</span>
-                <span>⚙️</span>
+                <Icons.Gear size={14} className="animate-spin" style={{ animationDuration: '4s' }} />
               </Link>
             </div>
           </div>
@@ -65,25 +66,25 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Pillar 1 */}
-            <div className="glassmorphism-card rounded-2xl p-6 relative overflow-hidden group">
+            <div className="glassmorphism-card rounded-2xl p-6 relative overflow-hidden group flex flex-col items-start">
               <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-brand-amber to-brand-amber opacity-10 rounded-bl-[100px]" />
-              <div className="text-3xl mb-4">🛒</div>
+              <Icons.Cart size={28} className="text-brand-amber mb-4 shrink-0" />
               <h3 className="text-lg font-bold text-white mb-2">{t('pillar1')}</h3>
               <p className="text-xs text-slate-400 leading-relaxed font-outfit">{t('pillar1Desc')}</p>
             </div>
 
             {/* Pillar 2 */}
-            <div className="glassmorphism-card rounded-2xl p-6 relative overflow-hidden group">
+            <div className="glassmorphism-card rounded-2xl p-6 relative overflow-hidden group flex flex-col items-start">
               <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-brand-red to-brand-amber opacity-10 rounded-bl-[100px]" />
-              <div className="text-3xl mb-4">🔧</div>
+              <Icons.Wrench size={28} className="text-brand-red mb-4 shrink-0" />
               <h3 className="text-lg font-bold text-white mb-2">{t('pillar2')}</h3>
               <p className="text-xs text-slate-400 leading-relaxed font-outfit">{t('pillar2Desc')}</p>
             </div>
 
             {/* Pillar 3 */}
-            <div className="glassmorphism-card rounded-2xl p-6 relative overflow-hidden group">
+            <div className="glassmorphism-card rounded-2xl p-6 relative overflow-hidden group flex flex-col items-start">
               <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-brand-purple to-brand-purple-light opacity-10 rounded-bl-[100px]" />
-              <div className="text-3xl mb-4">🤝</div>
+              <Icons.Handshake size={28} className="text-brand-purple-light mb-4 shrink-0" />
               <h3 className="text-lg font-bold text-white mb-2">{t('pillar3')}</h3>
               <p className="text-xs text-slate-400 leading-relaxed font-outfit">{t('pillar3Desc')}</p>
             </div>
@@ -134,7 +135,7 @@ export default function Home() {
                 href="/services"
                 className="w-full md:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-red to-brand-amber text-white font-black text-sm shadow-[0_0_15px_rgba(229,62,62,0.4)] transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
               >
-                <span>🔧</span>
+                <Icons.Wrench size={14} />
                 <span>{t('ctaBtn')}</span>
               </Link>
             </div>
@@ -154,7 +155,11 @@ export default function Home() {
                 {t('review1')}
               </p>
               <div className="flex items-center gap-2">
-                <span className="text-yellow-400">⭐⭐⭐⭐⭐</span>
+                <div className="flex gap-0.5 text-yellow-400 shrink-0">
+                  {Array.from({ length: 5 }).map((_, idx) => (
+                    <Icons.Star key={idx} size={12} fill="currentColor" />
+                  ))}
+                </div>
                 <span className="text-xs font-bold text-slate-400">{t('review1User')}</span>
               </div>
             </div>
@@ -165,7 +170,11 @@ export default function Home() {
                 {t('review2')}
               </p>
               <div className="flex items-center gap-2">
-                <span className="text-yellow-400">⭐⭐⭐⭐⭐</span>
+                <div className="flex gap-0.5 text-yellow-400 shrink-0">
+                  {Array.from({ length: 5 }).map((_, idx) => (
+                    <Icons.Star key={idx} size={12} fill="currentColor" />
+                  ))}
+                </div>
                 <span className="text-xs font-bold text-slate-400">{t('review2User')}</span>
               </div>
             </div>

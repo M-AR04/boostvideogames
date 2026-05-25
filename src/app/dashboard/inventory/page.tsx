@@ -6,6 +6,7 @@ import Sidebar from '@/components/layout/Sidebar';
 import { products as initialProducts, categories } from '@/data/products';
 import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { Icons } from '@/components/Icons';
 
 export default function InventoryDashboard() {
   const { activeRole } = useAuth();
@@ -73,7 +74,7 @@ export default function InventoryDashboard() {
       <div className="flex flex-col min-h-screen">
         <Navbar />
         <div className="flex-grow flex flex-col items-center justify-center text-center p-8 gap-4">
-          <span className="text-5xl">🛑</span>
+          <Icons.Lock size={64} className="text-brand-red animate-pulse" />
           <h2 className="text-xl font-bold text-white">Access Denied</h2>
           <p className="text-xs text-slate-400 max-w-sm">
             Please switch your role to Inventory Manager or Admin in the top bar to access the IMS database.

@@ -9,6 +9,7 @@ import ProductCard from '@/components/ProductCard';
 import { products } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { Icons } from '@/components/Icons';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -29,7 +30,7 @@ export default function ProductDetail({ params }: PageProps) {
       <div className="flex flex-col min-h-screen">
         <Navbar />
         <div className="flex-grow flex flex-col items-center justify-center text-center p-8 gap-4">
-          <span className="text-5xl">⚠️</span>
+          <Icons.Alert size={64} className="text-brand-red animate-pulse" />
           <h2 className="text-xl font-bold text-white">Product Not Found</h2>
           <Link href="/shop" className="text-brand-amber font-bold hover:underline">
             Back to Catalog
@@ -62,7 +63,7 @@ export default function ProductDetail({ params }: PageProps) {
             language === 'ar' ? 'flex-row-reverse' : ''
           }`}
         >
-          <span>◀</span>
+          <Icons.ArrowLeft size={12} className={`${language === 'ar' ? 'rotate-180' : ''}`} />
           <span>{t('backShop')}</span>
         </Link>
 
@@ -152,7 +153,7 @@ export default function ProductDetail({ params }: PageProps) {
                     onClick={handleAddToCart}
                     className="w-full py-4 rounded-xl bg-gradient-to-r from-brand-red via-brand-amber to-brand-amber text-white font-black text-sm shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all hover:scale-102 active:scale-98 flex items-center justify-center gap-2"
                   >
-                    <span>🛒</span>
+                    <Icons.Cart size={16} className="text-white" />
                     <span>{t('addToCart')}</span>
                   </button>
                   {successMsg && (
